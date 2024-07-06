@@ -1,8 +1,16 @@
 import Banner from '@/components/Banner'
 import Header from '@/components/Header'
 import ProductFeed from '@/components/ProductFeed'
+import { useDispatch, useSelector } from 'react-redux'
+import { calculTotal } from '@/slices/basketSlice'
+import { useEffect } from 'react'
 
 export default function Home({ products }) {
+  const { basketItems, totalPrice } = useSelector((state) => state.basket)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(calculTotal())
+  }, [basketItems])
   return (
     <div>
       <Header />
